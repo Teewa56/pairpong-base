@@ -1,0 +1,284 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "predictionId",
+						"type": "uint256"
+					}
+				],
+				"name": "PredictionSettled",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "predictionId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "player",
+						"type": "address"
+					}
+				],
+				"name": "PredictionSubmitted",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "getNextPredictionId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "predictionId",
+						"type": "uint256"
+					}
+				],
+				"name": "getPrediction",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "player",
+								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "coinA",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "coinB",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "predictedWinner",
+								"type": "string"
+							},
+							{
+								"internalType": "bool",
+								"name": "isSettled",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint256",
+								"name": "timestamp",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct BattlePrediction.Prediction",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "player",
+						"type": "address"
+					}
+				],
+				"name": "hasActivePrediction",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "nextPredictionId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "predictions",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "player",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "coinA",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "coinB",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "predictedWinner",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "isSettled",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "predictionId",
+						"type": "uint256"
+					}
+				],
+				"name": "settlePrediction",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "coinA",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "coinB",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "predictedWinner",
+						"type": "string"
+					}
+				],
+				"name": "submitPrediction",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"src/BattlePrediction.sol": "BattlePrediction"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"src/BattlePrediction.sol": {
+			"keccak256": "0xfa1169c189e61d2b1b40921210dd885480975c5e46b1a0a00110e5c29dd7da22",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0f9f14e4c207f5de6b7ad5f76cca1cfd685c23029803d306949462a7701b3d11",
+				"dweb:/ipfs/QmNLsaRfLzEty26GkABk6AgWsAjr1VFgkHDmH2L1GvD1gF"
+			]
+		}
+	},
+	"version": 1
+}
