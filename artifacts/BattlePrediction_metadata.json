@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.30+commit.73712a01"
+		"version": "0.8.20+commit.a1b79de6"
 	},
 	"language": "Solidity",
 	"output": {
@@ -17,6 +17,12 @@
 						"indexed": true,
 						"internalType": "uint256",
 						"name": "predictionId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "timestamp",
 						"type": "uint256"
 					}
 				],
@@ -37,10 +43,41 @@
 						"internalType": "address",
 						"name": "player",
 						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "predictedWinner",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
 					}
 				],
 				"name": "PredictionSubmitted",
 				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "player",
+						"type": "address"
+					}
+				],
+				"name": "getActivePredictionCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			},
 			{
 				"inputs": [],
@@ -50,6 +87,44 @@
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "player",
+						"type": "address"
+					}
+				],
+				"name": "getPlayerPredictionCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "player",
+						"type": "address"
+					}
+				],
+				"name": "getPlayerPredictions",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
 					}
 				],
 				"stateMutability": "view",
@@ -114,7 +189,7 @@
 						"type": "address"
 					}
 				],
-				"name": "hasActivePrediction",
+				"name": "hasActivePredictions",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -122,7 +197,7 @@
 						"type": "bool"
 					}
 				],
-				"stateMutability": "pure",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -146,6 +221,30 @@
 						"internalType": "address",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "playerPredictions",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -245,13 +344,88 @@
 			}
 		],
 		"devdoc": {
+			"details": "Manages user predictions before battles start",
 			"kind": "dev",
-			"methods": {},
+			"methods": {
+				"getActivePredictionCount(address)": {
+					"details": "Get count of active predictions for a player",
+					"params": {
+						"player": "The player's address"
+					},
+					"returns": {
+						"_0": "uint256 Number of active predictions"
+					}
+				},
+				"getNextPredictionId()": {
+					"details": "Get the next prediction ID that will be assigned",
+					"returns": {
+						"_0": "uint256 Next prediction ID"
+					}
+				},
+				"getPlayerPredictionCount(address)": {
+					"details": "Get number of predictions made by a player",
+					"params": {
+						"player": "The player's address"
+					},
+					"returns": {
+						"_0": "uint256 Number of predictions"
+					}
+				},
+				"getPlayerPredictions(address)": {
+					"details": "Get all prediction IDs for a player",
+					"params": {
+						"player": "The player's address"
+					},
+					"returns": {
+						"_0": "uint256[] Array of prediction IDs"
+					}
+				},
+				"getPrediction(uint256)": {
+					"details": "Get a prediction by ID",
+					"params": {
+						"predictionId": "The prediction ID"
+					},
+					"returns": {
+						"_0": "Prediction struct"
+					}
+				},
+				"hasActivePredictions(address)": {
+					"details": "Check if a player has any active (unsettled) predictions",
+					"params": {
+						"player": "The player's address"
+					},
+					"returns": {
+						"_0": "bool True if player has active predictions"
+					}
+				},
+				"settlePrediction(uint256)": {
+					"details": "Settle a prediction after the battle ends",
+					"params": {
+						"predictionId": "The prediction ID to settle"
+					},
+					"returns": {
+						"_0": "bool True on success"
+					}
+				},
+				"submitPrediction(string,string,string)": {
+					"details": "Submit a prediction before a battle starts",
+					"params": {
+						"coinA": "First cryptocurrency symbol",
+						"coinB": "Second cryptocurrency symbol",
+						"predictedWinner": "Which coin the player predicts will win"
+					},
+					"returns": {
+						"_0": "uint256 The prediction ID"
+					}
+				}
+			},
+			"title": "BattlePrediction",
 			"version": 1
 		},
 		"userdoc": {
 			"kind": "user",
 			"methods": {},
+			"notice": "Players submit predictions which are settled after battles end",
 			"version": 1
 		}
 	},
@@ -259,7 +433,7 @@
 		"compilationTarget": {
 			"src/BattlePrediction.sol": "BattlePrediction"
 		},
-		"evmVersion": "prague",
+		"evmVersion": "shanghai",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -272,11 +446,11 @@
 	},
 	"sources": {
 		"src/BattlePrediction.sol": {
-			"keccak256": "0xfa1169c189e61d2b1b40921210dd885480975c5e46b1a0a00110e5c29dd7da22",
+			"keccak256": "0xd44068c741cba039a6cc524872b61ab61a1a43a103b386a4218a67ce5353059f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://0f9f14e4c207f5de6b7ad5f76cca1cfd685c23029803d306949462a7701b3d11",
-				"dweb:/ipfs/QmNLsaRfLzEty26GkABk6AgWsAjr1VFgkHDmH2L1GvD1gF"
+				"bzz-raw://1f5830eb050bd2c57f09287a38609935c8799af7dda8b6d5ec38981ccf4a6277",
+				"dweb:/ipfs/QmXVweNjfQvoY1D2QxaW6u8nA4GxuCfWRmQTHyoHZs3fmN"
 			]
 		}
 	},

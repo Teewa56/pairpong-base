@@ -1,0 +1,677 @@
+{
+	"compiler": {
+		"version": "0.8.20+commit.a1b79de6"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "battleId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "player",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "wasCorrect",
+						"type": "bool"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "pointsEarned",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"name": "BattleSubmitted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "player",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "totalPoints",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "accuracy",
+						"type": "uint256"
+					}
+				],
+				"name": "LeaderboardUpdated",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "BONUS_POINTS_HIGH_DELTA",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "DELTA_THRESHOLD",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "POINTS_PER_CORRECT_PREDICTION",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "battleCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "battleHistory",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "player",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "coinA",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "coinB",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "predictedWinner",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "actualWinner",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "wasCorrect",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "delta",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "scoreA",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "scoreB",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "emergencyWithdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "player",
+						"type": "address"
+					}
+				],
+				"name": "getAccuracy",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "battleId",
+						"type": "uint256"
+					}
+				],
+				"name": "getBattleById",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "player",
+								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "coinA",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "coinB",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "predictedWinner",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "actualWinner",
+								"type": "string"
+							},
+							{
+								"internalType": "bool",
+								"name": "wasCorrect",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint256",
+								"name": "delta",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "scoreA",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "scoreB",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "timestamp",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct BattleLeaderboard.BattleRecord",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getBattleCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "player",
+						"type": "address"
+					}
+				],
+				"name": "getPlayerBattleCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "player",
+						"type": "address"
+					}
+				],
+				"name": "getPlayerBattleIds",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					}
+				],
+				"name": "getUserStats",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "totalPredictions",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "correctPredictions",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "wrongPredictions",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "points",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "highestDelta",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "lastBattleTime",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct BattleLeaderboard.PlayerStats",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "playerBattleIds",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "playerStats",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "totalPredictions",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "correctPredictions",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "wrongPredictions",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "points",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "highestDelta",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastBattleTime",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "coinA",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "coinB",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "predictedWinner",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "actualWinner",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "performanceDelta",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "scoreA",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "scoreB",
+						"type": "uint256"
+					}
+				],
+				"name": "submitBattle",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "battleId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "player",
+						"type": "address"
+					}
+				],
+				"name": "wasPredictionCorrect",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "Manages battle predictions, results, and player statistics",
+			"kind": "dev",
+			"methods": {
+				"emergencyWithdraw()": {
+					"details": "Emergency function to withdraw funds (if any)"
+				},
+				"getAccuracy(address)": {
+					"details": "Get accuracy percentage for a player",
+					"params": {
+						"player": "The player's address"
+					},
+					"returns": {
+						"_0": "uint256 Accuracy as percentage (0-100)"
+					}
+				},
+				"getBattleById(uint256)": {
+					"details": "Get battle record by ID",
+					"params": {
+						"battleId": "The ID of the battle"
+					},
+					"returns": {
+						"_0": "BattleRecord struct for the specified battle"
+					}
+				},
+				"getBattleCount()": {
+					"details": "Get total number of battles recorded",
+					"returns": {
+						"_0": "uint256 Total battle count"
+					}
+				},
+				"getPlayerBattleCount(address)": {
+					"details": "Get number of battles for a player",
+					"params": {
+						"player": "The player's address"
+					},
+					"returns": {
+						"_0": "uint256 Number of battles"
+					}
+				},
+				"getPlayerBattleIds(address)": {
+					"details": "Get all battle IDs for a player",
+					"params": {
+						"player": "The player's address"
+					},
+					"returns": {
+						"_0": "uint256[] Array of battle IDs"
+					}
+				},
+				"getUserStats(address)": {
+					"details": "Get complete statistics for a player",
+					"params": {
+						"user": "The player's address"
+					},
+					"returns": {
+						"_0": "PlayerStats struct containing all stats"
+					}
+				},
+				"submitBattle(string,string,string,string,uint256,uint256,uint256)": {
+					"details": "Submit a battle result and update player statistics",
+					"params": {
+						"actualWinner": "Actual battle result",
+						"coinA": "First cryptocurrency symbol",
+						"coinB": "Second cryptocurrency symbol",
+						"performanceDelta": "Performance delta in basis points",
+						"predictedWinner": "User's prediction",
+						"scoreA": "Score of coin A",
+						"scoreB": "Score of coin B"
+					},
+					"returns": {
+						"_0": "battleId The ID of the recorded battle",
+						"_1": "wasCorrect Whether the prediction was correct",
+						"_2": "totalPointsEarned Points earned from this battle"
+					}
+				},
+				"wasPredictionCorrect(uint256,address)": {
+					"details": "Compare if a player's prediction was correct",
+					"params": {
+						"battleId": "The battle ID to check",
+						"player": "The player to verify"
+					},
+					"returns": {
+						"_0": "bool Whether the prediction was correct"
+					}
+				}
+			},
+			"title": "BattleLeaderboard",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"notice": "This contract tracks player performance in Pong battles with a point system",
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"src/BattleLeaderboard.sol": "BattleLeaderboard"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"src/BattleLeaderboard.sol": {
+			"keccak256": "0xc0bd5ecb5aa01d35e34cbf035a1c137e6c6a5b3eefcda17dcc086b2ee689458e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://86025e16d64033fa0238bad0de5d8e7184fc8b9618a79b1916f56c09f26db9e4",
+				"dweb:/ipfs/QmQCT7M5pvunGmTPc5iyBxn8fgwaLGkfw7zCrjEU1XZqik"
+			]
+		}
+	},
+	"version": 1
+}

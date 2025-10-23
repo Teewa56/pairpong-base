@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.30+commit.73712a01"
+		"version": "0.8.20+commit.a1b79de6"
 	},
 	"language": "Solidity",
 	"output": {
@@ -58,6 +58,25 @@
 					}
 				],
 				"name": "ApprovalForAll",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "newUri",
+						"type": "string"
+					}
+				],
+				"name": "MetadataUpdate",
 				"type": "event"
 			},
 			{
@@ -177,7 +196,7 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "player",
+						"name": "tokenOwner",
 						"type": "address"
 					},
 					{
@@ -195,6 +214,30 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "recipients",
+						"type": "address[]"
+					},
+					{
+						"internalType": "string[]",
+						"name": "metadataUris",
+						"type": "string[]"
+					}
+				],
+				"name": "mintBatch",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -270,6 +313,29 @@
 				"inputs": [
 					{
 						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "safeTransferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
 						"name": "operator",
 						"type": "address"
 					},
@@ -292,6 +358,19 @@
 						"internalType": "string",
 						"name": "",
 						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalSupply",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -348,16 +427,164 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "newUri",
+						"type": "string"
+					}
+				],
+				"name": "updateTokenURI",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
+			"details": "ERC721-compliant NFT contract for battle victories",
 			"kind": "dev",
-			"methods": {},
+			"methods": {
+				"approve(address,uint256)": {
+					"details": "Approve a token for transfer",
+					"params": {
+						"to": "Address to approve",
+						"tokenId": "Token ID to approve"
+					}
+				},
+				"balanceOf(address)": {
+					"details": "Get balance of an address",
+					"params": {
+						"account": "The address to check"
+					},
+					"returns": {
+						"_0": "uint256 Number of tokens owned"
+					}
+				},
+				"getApproved(uint256)": {
+					"details": "Get approved address for token",
+					"params": {
+						"tokenId": "Token ID"
+					},
+					"returns": {
+						"_0": "address The approved address"
+					}
+				},
+				"getLastTokenId()": {
+					"details": "Get the last token ID that was minted",
+					"returns": {
+						"_0": "uint256 Last token ID"
+					}
+				},
+				"getTokenURI(uint256)": {
+					"details": "Get token URI metadata",
+					"params": {
+						"tokenId": "The token ID"
+					},
+					"returns": {
+						"_0": "string The metadata URI"
+					}
+				},
+				"isApprovedForAll(address,address)": {
+					"details": "Check if operator is approved for all tokens",
+					"params": {
+						"operator": "Operator's address",
+						"tokenOwner": "Owner's address"
+					},
+					"returns": {
+						"_0": "bool True if approved for all"
+					}
+				},
+				"mintBatch(address[],string[])": {
+					"details": "Batch mint multiple NFTs",
+					"params": {
+						"metadataUris": "Array of metadata URIs",
+						"recipients": "Array of recipient addresses"
+					},
+					"returns": {
+						"_0": "uint256[] Array of minted token IDs"
+					}
+				},
+				"mintBattleNFT(address,string)": {
+					"details": "Mint a new battle victory NFT",
+					"params": {
+						"metadataUri": "The metadata URI for the NFT",
+						"recipient": "The address to receive the NFT"
+					},
+					"returns": {
+						"_0": "uint256 The minted token ID"
+					}
+				},
+				"ownerOf(uint256)": {
+					"details": "Get owner of a token",
+					"params": {
+						"tokenId": "The token ID"
+					},
+					"returns": {
+						"_0": "address The owner's address"
+					}
+				},
+				"safeTransferFrom(address,address,uint256)": {
+					"details": "Safe transfer from (checks recipient is valid contract or EOA)",
+					"params": {
+						"from": "Source address",
+						"to": "Destination address",
+						"tokenId": "Token ID to transfer"
+					}
+				},
+				"setApprovalForAll(address,bool)": {
+					"details": "Set operator approval for all tokens",
+					"params": {
+						"approved": "Whether to approve or revoke",
+						"operator": "Address of operator"
+					}
+				},
+				"totalSupply()": {
+					"details": "Get total supply of NFTs minted",
+					"returns": {
+						"_0": "uint256 Total tokens minted"
+					}
+				},
+				"transfer(uint256,address,address)": {
+					"details": "Transfer a token between addresses",
+					"params": {
+						"recipient": "The recipient's address",
+						"sender": "The sender's address (must be msg.sender)",
+						"tokenId": "The token ID"
+					},
+					"returns": {
+						"_0": "bool True on success"
+					}
+				},
+				"transferFrom(address,address,uint256)": {
+					"details": "Transfer from one address to another (ERC721 standard)",
+					"params": {
+						"from": "Source address",
+						"to": "Destination address",
+						"tokenId": "Token ID to transfer"
+					}
+				},
+				"updateTokenURI(uint256,string)": {
+					"details": "Update metadata URI for a token",
+					"params": {
+						"newUri": "New metadata URI",
+						"tokenId": "Token ID"
+					}
+				}
+			},
+			"title": "BattleVictoryNFT",
 			"version": 1
 		},
 		"userdoc": {
 			"kind": "user",
 			"methods": {},
+			"notice": "Mint and transfer Battle Victory NFTs",
 			"version": 1
 		}
 	},
@@ -365,7 +592,7 @@
 		"compilationTarget": {
 			"src/BattleVictoryNFT.sol": "BattleVictoryNFT"
 		},
-		"evmVersion": "prague",
+		"evmVersion": "shanghai",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -378,11 +605,11 @@
 	},
 	"sources": {
 		"src/BattleVictoryNFT.sol": {
-			"keccak256": "0xef68efebd12768b7af275624076a28709311b9728b73970584d88dec12f56d3b",
+			"keccak256": "0xdb3151241065a6891c7c8b93069929a91ca5ac9972c0dc7bbed89967426980ae",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c2221b0093d9c5e0c25329d3620a4a11693799904d8c60b680443ef7361bcc41",
-				"dweb:/ipfs/QmbpoDVXGpvmRGn8cvSEXXpasBP9kYR6RGzU8zVYRf5211"
+				"bzz-raw://346b24473535b52fce4c5969e6e7686978c333567a03e29127adc9726761868e",
+				"dweb:/ipfs/QmWQp4hLaumFchiJLQjWPAuczE76ZLN9ddDPvAcFMcPpeA"
 			]
 		}
 	},
